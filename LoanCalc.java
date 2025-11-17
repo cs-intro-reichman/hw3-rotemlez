@@ -31,9 +31,7 @@ public class LoanCalc {
 		double perP = loan;
 		double precent = (rate+100) / 100.0;
 		for (int i=0; i<n; i++){
-			perP = perP*precent;
-			perP = perP - payment;
-			
+			perP = (perP - payment)*precent;
 		}
 		return perP;
 	}
@@ -45,8 +43,9 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
 		double payment = 0.0;
-		double times = 1.0;
+		double times = 0.01;
 		double currentBalance =1.0;
+		iterationCounter=0;
 		while (currentBalance>epsilon){
 			payment += times;
 			iterationCounter++;
@@ -64,6 +63,7 @@ public class LoanCalc {
 		double L = 0.0;
 		double H = loan;
 		double M = 0.0;
+		iterationCounter=0;
 		while ((H-L)>epsilon){
 			M = (L+H)/2.0;
 			iterationCounter++;
